@@ -1,13 +1,13 @@
 import bcrypt from "bcryptjs" 
 import jsonwebtoken from "jsonwebtoken" 
 
-import userModel from "../models/users.js"
+import userModel from "../models/userEmployee.js"
 
 import {config} from "../config.js"
 
-const loginUsersController = {};
+const loginUserEmployeeController = {};
 
-loginUsersController.login = async (req, res) => {
+loginUserEmployeeController.login = async (req, res) => {
     try{
         const {email, password} = req.body
 
@@ -44,7 +44,7 @@ loginUsersController.login = async (req, res) => {
         await userFound.save();
 
         const token = jsonwebtoken .sign(
-            {id: userFound._id, userType: "UserAdmin"},
+            {id: userFound._id, userType: "UserEmployee"},
             config.JWT.secret,
             {expiresIn: "30d"}
         )
@@ -60,6 +60,6 @@ loginUsersController.login = async (req, res) => {
 }
 
 
-export default loginUsersController
+export default loginUserEmployeeController
 
 
